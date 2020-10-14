@@ -1,5 +1,11 @@
 # Docker base image to build RPM files for CentOS
 
+[jorgklein/rpmbuild][1] is a [Docker][2] base image to build RPM files for
+CentOS 8.
+
+[1]: https://hub.docker.com/r/joergklein/rpmbuild
+[2]: https://docker.com
+
 Sometimes you might have access to an open source application source code but
 might not have the RPM file to install it on your system. In that situation, you
 can either compile the source code and install the application from source code,
