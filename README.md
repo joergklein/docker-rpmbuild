@@ -295,3 +295,25 @@ Complete!
 
 ```
 
+### Some simple examples to copy the RPM files with the docker cp command.
+
+#### Copy the RPM files from the container to the host
+
+```sh
+docker cp container_id:./root/rpmbuild/SRPMS/hello-2.10-1.el8.src.rpm .
+docker cp container_id:./root/rpmbuild/RPMS/x86_64/hello-2.10-1.el8.x86_64.rpm .
+```
+
+#### Copy the RPM file from the host into the container
+
+```sh
+docker exec -i container_id sh -c 'cat > ./bar/foo.txt' < ./foo.txt
+```
+
+#### Copy from a container to a container mixes 1 and 2
+
+```sh
+docker cp container_id1:./bar/foo.txt .
+docker exec -i container_id2 sh -c 'cat > ./bar/foo.txt' < ./foo.txt
+```
+
