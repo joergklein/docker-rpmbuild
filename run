@@ -11,12 +11,12 @@ function run(){
 function status(){
   CONTAINER_ID=$(docker ps -a | grep -v Exit | grep $RPMBUILD | awk '{print $1}')
   if [[ -z $CONTAINER_ID ]] ; then
-        echo 'Not running.'
-        return 1
-    else
-        echo $RPMBUILD "is running with the container id: $CONTAINER_ID"
-        return 0
-    fi
+    echo 'Not running.'
+    return 1
+  else
+    echo $RPMBUILD "is running with the container id: $CONTAINER_ID"
+    return 0
+  fi
 }
 
 function start(){
@@ -59,7 +59,7 @@ case "$1" in
           ;;
   start)    function_exists start && start
           ;;
-  stop)  function_exists stop && stop
+  stop)     function_exists stop && stop
           ;;
   restart)  function_exists restart && restart
           ;;
