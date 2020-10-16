@@ -6,6 +6,9 @@ CentOS 8.
 [1]: https://hub.docker.com/r/joergklein/rpmbuild
 [2]: https://docker.com
 
+**Notice:** Use the run script in the GitHub Repository
+https://github.com/joergklein/docker-rpmbuild
+
 Sometimes you might have access to an open source application source code but
 might not have the RPM file to install it on your system. In that situation, you
 can either compile the source code and install the application from source code,

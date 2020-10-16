@@ -1,5 +1,73 @@
 #!/bin/bash
 
-docker run -ti --rm --privileged --name rpmbuild \
-           joergklein/rpmbuild /bin/sh
+# Container name
+RPMBUILD="rpmbuild"
 
+
+function run(){
+  docker run -it --privileged --name rpmbuild joergklein/rpmbuild
+}
+
+function status(){
+  CONTAINER_ID=$(docker ps -a | grep -v Exit | grep $RPMBUILD | awk '{print $1}')
+  if [[ -z $CONTAINER_ID ]] ; then
+        echo 'Not running.'
+        return 1
+    else
+        echo $RPMBUILD "is running with the container id: $CONTAINER_ID"
+        return 0
+    fi
+}
+
+function start(){
+  docker start $RPMBUILD
+}
+
+function stop(){
+  docker stop $RPMBUILD
+}
+
+function restart(){
+  stop
+  start
+}
+
+function bash(){
+  docker attach $RPMBUILD
+}
+
+function delete_container(){
+  docker rm $RPMBUILD
+}
+
+function_exists(){
+  declare -f -F $1 > /dev/null
+  return $?
+}
+
+
+if [ $# -lt 1 ]
+then
+  echo "Usage : $0 run|status|start|stop|restart|bash|delete_container "
+  exit
+fi
+
+case "$1" in
+  run)     function_exists run && run
+          ;;
+  status)   function_exists status && status
+          ;;
+  start)    function_exists start && start
+          ;;
+  stop)  function_exists stop && stop
+          ;;
+  restart)  function_exists restart && restart
+          ;;
+  bash)     function_exists bash && bash
+          ;;
+  delete_container)
+            function_exists delete_container && delete_container
+          ;;
+  *)      echo "Invalid command - Valid->run|status|start|stop|restart|bash|delete_container"
+          ;;
+esac
