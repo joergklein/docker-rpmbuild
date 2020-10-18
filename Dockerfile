@@ -13,12 +13,12 @@ RUN dnf update -y  \
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
-# Set Workdir to root/rpmbuild
-WORKDIR /root
-
 # Copy files
 COPY rpmmacros .rpmmacros
 
 # Setup rpmdev-setuptree
 RUN rpmdev-setuptree
+
+# Set Workdir to root/rpmbuild
+WORKDIR /root/rpmbuild
 
